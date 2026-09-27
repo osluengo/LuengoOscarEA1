@@ -1,35 +1,34 @@
 public abstract class Bicicleta {
-
-    private String codigoBicicleta;
-    private int anoFabrica;
+    private String codigo;
+    private int anioFabricacion;
     private double peso;
 
-    public Bicicleta(String codigoBicicleta, int anoFabrica, double peso) {
-        this.codigoBicicleta = codigoBicicleta;
-        this.anoFabrica = anoFabrica;
-        this.peso = peso;
+    public Bicicleta(String codigo, int anioFabricacion, double peso) {
+        setCodigo(codigo);
+        setAnioFabricacion(anioFabricacion);
+        setPeso(peso);
     }
 
-    public String getCodigoBicicleta() {
-        return codigoBicicleta;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoBicicleta(String codigoBicicleta) {
-        if (codigoBicicleta == null || codigoBicicleta.trim().isEmpty()){
-            throw new IllegalArgumentException("El cdogio no puede ser nulo ni vacio");
+    public void setCodigo(String codigo) {
+        if (codigo == null || codigo.trim().isEmpty()) {
+            throw new IllegalArgumentException("El código de la bicicleta no puede ser nulo ni estar vacío.");
         }
-        this.codigoBicicleta = codigoBicicleta;
+        this.codigo = codigo;
     }
 
-    public int getAnoFabrica() {
-        return anoFabrica;
+    public int getAnioFabricacion() {
+        return anioFabricacion;
     }
 
-    public void setAnoFabrica(int anoFabrica) {
-        if (anoFabrica < 2000 || anoFabrica > 2026){
-            throw new IllegalArgumentException("El ano de fabrica debe estar entre 2000 e 2026");
+    public void setAnioFabricacion(int anioFabricacion) {
+        if (anioFabricacion < 2000 || anioFabricacion > 2026) {
+            throw new IllegalArgumentException("El año de fabricación debe estar entre 2000 y 2026.");
         }
-        this.anoFabrica = anoFabrica;
+        this.anioFabricacion = anioFabricacion;
     }
 
     public double getPeso() {
@@ -37,22 +36,19 @@ public abstract class Bicicleta {
     }
 
     public void setPeso(double peso) {
-        if (peso<=0){
-            throw new IllegalArgumentException("El peso debe ser mayor que 0");
+        if (peso <= 0) {
+            throw new IllegalArgumentException("El peso debe ser mayor que cero.");
         }
         this.peso = peso;
     }
 
+    // Método abstracto para polimorfismo en el cálculo del costo
+    public abstract double calcularCostoMantencion();
+
     @Override
     public String toString() {
-        return "Bicicleta{" +
-                "codigoBicicleta='" + codigoBicicleta + '\'' +
-                ", anoFabrica=" + anoFabrica +
-                ", peso=" + peso +
-                '}';
+        return "Código: " + codigo + " | Año: " + anioFabricacion;
     }
-
-    public abstract double calcularCostoMantencion();
 
     public abstract void add(Bicicleta bicicletas);
 }
